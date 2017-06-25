@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace ComplexNumberTest
 {
     [TestFixture]
-    public class ComplexNumber
+    public class ComplexNumberTest
     {
         Complex _left;
         Complex _right;
