@@ -165,12 +165,16 @@ namespace ComplexNumber
             return left.Equals(right);
         }
 
+        private bool Equals(Complex other)
+        {
+            return (Math.Abs(RealNumbers - other.RealNumbers) <= 0.000001) && (Math.Abs(ImaginaryUnit - other.ImaginaryUnit) <= 0.000001);
+        }
+
         public override bool Equals(object obj)
         {
-            if(obj != null && obj is Complex )
-            return (Math.Abs(RealNumbers - ((Complex)obj).RealNumbers)  <=0.000001) && (Math.Abs(ImaginaryUnit - ((Complex)obj).ImaginaryUnit) <= 0.000001);
-
-            return false;
+            if (ReferenceEquals(null, obj)) return false;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Complex)obj);
         }
         #endregion
 
