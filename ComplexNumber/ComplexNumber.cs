@@ -23,10 +23,10 @@ namespace ComplexNumber
 
         public static Complex operator +(Complex left, Complex right)
         {
-            return AddStat(left, right);
+            return Add(left, right);
         }
 
-        public static Complex AddStat(Complex left, Complex right)
+        public static Complex Add(Complex left, Complex right)
         {
             return new Complex(left.RealNumbers + right.RealNumbers, left.ImaginaryUnit + right.ImaginaryUnit);
         }
@@ -35,14 +35,14 @@ namespace ComplexNumber
             Complex complex = new Complex();
             for (int i = 0; i < complexes.Length; i++)
             {
-                complex = AddStat(complex, complexes[i]);
+                complex = Add(complex, complexes[i]);
             }
             return complex;
         }
 
-        public Complex Add(Complex left, Complex right)
+        public Complex Add(Complex complex)
         {
-            return AddStat(left, right);
+            return Add(this,complex);
         }
         public Complex Add(params Complex[] complexes)
         {
@@ -57,32 +57,17 @@ namespace ComplexNumber
 
         public static Complex operator -(Complex left, Complex right)
         {
-            return SubStat(left, right);
+            return Sub(left, right);
         }
 
-        public static Complex SubStat(Complex left, Complex right)
+        public static Complex Sub(Complex left, Complex right)
         {
             return new Complex(left.RealNumbers - right.RealNumbers, left.ImaginaryUnit - right.ImaginaryUnit);
         }
-
-        public static Complex SubStat(params Complex[] complexes)
+       
+        public Complex Sub(Complex complex)
         {
-            Complex complex = new Complex();
-            for (int i = 0; i < complexes.Length; i++)
-            {
-                complex = SubStat(complex, complexes[i]);
-            }
-            return complex;
-        }
-
-        public Complex Sub(Complex left, Complex right)
-        {
-            return SubStat(left, right);
-        }
-
-        public Complex Sub(params Complex[] complexes)
-        {
-            return SubStat(complexes);
+            return Sub(this,complex);
         }
 
         #endregion
@@ -92,10 +77,10 @@ namespace ComplexNumber
 
         public static Complex operator *(Complex left, Complex right)
         {
-            return MulStat(left, right);
+            return Mul(left, right);
         }
 
-        public static Complex MulStat(Complex left, Complex right)
+        public static Complex Mul(Complex left, Complex right)
         {
             return new Complex(left.RealNumbers * right.RealNumbers - left.ImaginaryUnit * right.ImaginaryUnit, left.ImaginaryUnit * right.RealNumbers + left.RealNumbers * right.ImaginaryUnit);
         }
@@ -105,14 +90,14 @@ namespace ComplexNumber
             Complex complex = new Complex();
             for (int i = 0; i < complexes.Length; i++)
             {
-                complex = MulStat(complex, complexes[i]);
+                complex = Mul(complex, complexes[i]);
             }
             return complex;
         }
 
-        public Complex Mul(Complex left, Complex right)
+        public Complex Mul(Complex complex)
         {
-            return MulStat(left, right);
+            return MulStat(this, complex);
         }
 
         public Complex Mul(params Complex[] complexes)
@@ -126,35 +111,21 @@ namespace ComplexNumber
 
         public static Complex operator /(Complex left, Complex right)
         {
-            return DivStat(left, right);
+            return Div(left, right);
         }
 
-        public static Complex DivStat(Complex left, Complex right)
+        public static Complex Div(Complex left, Complex right)
         {
             double realNumbers = (left.RealNumbers * right.RealNumbers + left.ImaginaryUnit * right.ImaginaryUnit) / (Math.Pow(right.RealNumbers, 2) + Math.Pow(right.ImaginaryUnit, 2));
             double imaginaryUnit = (left.ImaginaryUnit * right.RealNumbers - left.RealNumbers * right.ImaginaryUnit) / (Math.Pow(right.RealNumbers, 2) + Math.Pow(right.ImaginaryUnit, 2));
             return new Complex(realNumbers, imaginaryUnit);
         }
 
-        public static Complex DivStat(params Complex[] complexes)
+        public Complex Div(Complex complex)
         {
-            Complex complex = new Complex();
-            for (int i = 0; i < complexes.Length; i++)
-            {
-                complex = DivStat(complex, complexes[i]);
-            }
-            return complex;
+            return Div(this,complex);
         }
 
-        public Complex Div(Complex left, Complex right)
-        {
-            return MulStat(left, right);
-        }
-
-        public Complex Div(params Complex[] complexes)
-        {
-            return DivStat(complexes);
-        }
         #endregion
 
         //-------------------- Module --------------------------//
@@ -196,13 +167,16 @@ namespace ComplexNumber
 
         public override bool Equals(object obj)
         {
+            if(obj != null && obj is Complex )
             return (Math.Abs(RealNumbers - ((Complex)obj).RealNumbers)  <=0.000001) && (Math.Abs(ImaginaryUnit - ((Complex)obj).ImaginaryUnit) <= 0.000001);
+
+            return false;
         }
         #endregion
 
         public override int GetHashCode()
         {
-            return RealNumbers.GetHashCode() ^ ImaginaryUnit.GetHashCode();
+            return RealNumbers.GetHashCode()*397 ^ ImaginaryUnit.GetHashCode()*131;
         }
 
         public override string ToString()

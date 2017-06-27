@@ -26,7 +26,7 @@ namespace ComplexNumberTest
         {
             Complex rightComplex = new Complex(10, -1);
 
-            Assert.AreEqual(rightComplex,Complex.AddStat(_left,_right));
+            Assert.AreEqual(rightComplex,Complex.Add(_left,_right));
         }
 
         [Test]
@@ -34,7 +34,7 @@ namespace ComplexNumberTest
         {
             Complex rightComplex = new Complex(4, -9);
 
-            Assert.AreEqual(rightComplex, Complex.SubStat(_left, _right));
+            Assert.AreEqual(rightComplex, Complex.Sub(_left, _right));
         }
 
         [Test]
@@ -42,7 +42,7 @@ namespace ComplexNumberTest
         {
             Complex rightComplex = new Complex(41, 13);
 
-            Assert.AreEqual(rightComplex, Complex.MulStat(_left, _right));
+            Assert.AreEqual(rightComplex, Complex.Mul(_left, _right));
         }
 
         [Test]
@@ -50,7 +50,7 @@ namespace ComplexNumberTest
         {
             Complex rightComplex = new Complex(1.0 / 25.0, -43.0 / 25.0);
 
-            Assert.AreEqual(rightComplex, Complex.DivStat(_left, _right));
+            Assert.AreEqual(rightComplex, Complex.Div(_left, _right));
         }
 
         [Test]
