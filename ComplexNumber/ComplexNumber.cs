@@ -173,6 +173,7 @@ namespace ComplexNumber
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
+            
             if (obj.GetType() != this.GetType()) return false;
             return Equals((Complex)obj);
         }
@@ -180,7 +181,10 @@ namespace ComplexNumber
 
         public override int GetHashCode()
         {
-            return RealNumbers.GetHashCode()*397 ^ ImaginaryUnit.GetHashCode()*131;
+            unchecked
+            {
+                return RealNumbers.GetHashCode() * 127 ^ ImaginaryUnit.GetHashCode() * 131;
+            }
         }
 
         public override string ToString()
