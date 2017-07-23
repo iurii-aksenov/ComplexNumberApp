@@ -30,7 +30,7 @@ namespace ComplexNumber
         {
             return new Complex(left.RealNumbers + right.RealNumbers, left.ImaginaryUnit + right.ImaginaryUnit);
         }
-        public static Complex AddStat(params Complex[] complexes)
+        public static Complex Sum(params Complex[] complexes)
         {
             Complex complex = new Complex();
             for (int i = 0; i < complexes.Length; i++)
@@ -46,7 +46,7 @@ namespace ComplexNumber
         }
         public Complex Add(params Complex[] complexes)
         {
-            return AddStat(complexes);
+            return Sum(complexes);
         }
 
         #endregion
@@ -85,7 +85,7 @@ namespace ComplexNumber
             return new Complex(left.RealNumbers * right.RealNumbers - left.ImaginaryUnit * right.ImaginaryUnit, left.ImaginaryUnit * right.RealNumbers + left.RealNumbers * right.ImaginaryUnit);
         }
 
-        public static Complex MulStat(params Complex[] complexes)
+        public static Complex Prod(params Complex[] complexes)
         {
             Complex complex = new Complex();
             for (int i = 0; i < complexes.Length; i++)
@@ -97,12 +97,12 @@ namespace ComplexNumber
 
         public Complex Mul(Complex complex)
         {
-            return MulStat(this, complex);
+            return Prod(this, complex);
         }
 
         public Complex Mul(params Complex[] complexes)
         {
-            return MulStat(complexes);
+            return Prod(complexes);
         }
         #endregion
 
